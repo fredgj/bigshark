@@ -25,3 +25,5 @@ in order to install the module.
 
 Then go to settings.py and add your database and host.
 
+If your are gonna run this with gunicorn, go to gunicorn\_config.py and set "command" and 
+"pythonpath" to your gunicorn and python executable.
