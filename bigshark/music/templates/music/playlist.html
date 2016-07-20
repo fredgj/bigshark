@@ -1,0 +1,83 @@
+{% load music_extra_tags %}
+<div class="pre-scrollable">
+  <div id="playlists">
+    {% for playlist in playlists %}
+      <h4>
+        <span id="playlist_{{playlist.id}}"
+              class="label label-primary title"
+              onclick=onClickPlaylist({{playlist.id}}) 
+              style="cursor: pointer;">
+          {{playlist.name|split:"_"|join:" "}}
+        </span>
+      </h4>
+    {% endfor %}
+  </div>           
+</div>
+
+<br>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  New playlist
+</button>
+
+<button type="button" class="btn btn-primary">
+  Edit playlist
+</button>
+
+<button type="button" class="btn btn-primary" onclick=onClickLoadPlaylist()>
+  Load playlist
+</button>
+
+<br><br>
+
+<div class="form-group">
+  <input id="searchfieldPlaylists" 
+         type="text" 
+         class="form-control" 
+         placeholder="Search" 
+         oninput="onInputSearchPlaylists()">
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="form-group">
+          <input id="playlistname" type="text" class="form-control" placeholder="Playlist name">
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="pre-scrollable">
+          <div id="songlist-modal">
+            {% for song in songs %}
+              <h4>
+                <span id="song_{{song.id}}"
+                      class="label label-primary title"
+                      onclick=onClickSongModal({{song.id}}) 
+                      style="cursor: pointer;">
+                  {{song}}
+                </span>
+              </h4>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+            <div class="form-group">
+              <input id="searchfieldModal"
+                     type="text" 
+                     class="form-control" 
+                     placeholder="Search" 
+                     oninput="onInputSearchModal()">
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="onSavePlaylist()">Save changes</button>{% csrf_token %}
+      </div>
+    </div>
+  </div>
+</div>

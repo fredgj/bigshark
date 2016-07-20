@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static from staticfiles %}
+    <link rel="shortcut icon" href="/static/img/favicon.ico" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="/static/js/mediaelement-and-player.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/stylesheet.css">
+
+    <title>BigShark - because tiny sharks sucks</title>
+
+  </head>
+  
+  <body background="/static/img/background.jpg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-3 col-xs-offset-5">
+          <img id="logo" src="/static/img/bigshark.png">       
+        </div>        
+      </div>
+      
+      <div class="row">
+        <div class="col-xs-12 col-md-8">  
+        <div class="panel panel-default">
+          <div class="panel-body text-center">
+            <!---<h3 class="panel-title">Available songs</h3> --!>
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#1" data-toggle="tab">Music</a></li>
+              <li><a href="#2" data-toggle="tab">Playlists</a></li>
+            </ul>
+
+            <div class="tab-content ">
+	      <div class="tab-pane active" id="1">
+                <div class="pre-scrollable"> 
+                  <div id="songlist">
+                    {% for song in songs %}
+                      <h4>
+                        <span id="title_{{song.id}}"
+                              class="label label-primary title"
+                              onclick=onClickTitle({{forloop.counter0}},{{song.id}}) 
+                              style="cursor: pointer;">
+                          {{song.name}}
+                        </span>
+                      </h4>
+                    {% endfor %}
+                  </div>
+                </div>
+                <br>
+                <button type="button" class="btn btn-primary" onclick="onClickAllMusic()">All music</button>
+                <br><br>
+                <div class="form-group">
+                  <input id="searchfieldSongs" 
+                         type="text" 
+                         class="form-control" 
+                         placeholder="Search" 
+                         oninput="onInputSearchSongs()">
+                </div>
+              </div>
+
+              <div class="tab-pane" id="2">
+                {% include "music/playlist.html" %}
+              </div>
+
+            </div>
+          </div>
+    
+          <div class="panel-body text-center">             
+            <div class="btn-group" role="group" aria-label="...">
+              <div class="mplayer">
+                <h2 id="mplayer-title"></h2>
+                  <audio id="mplayer" controls="controls">
+                    <source src="/music/song/id/{{songs.0.id}}" type="audio/mp3">
+                  </audio>
+              </div>
+
+              <button type="button" 
+                      class="btn btn-success btn-sm" 
+                      onclick="prevOnclick()">&lt;&lt;
+              </button>
+              <button type="button" 
+                      class="btn btn-success btn-sm" 
+                      onclick="nextOnclick()">&gt;&gt;
+              </button>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <form id="fileForm" action="/music/" method="post">{% csrf_token %}
+              <div id="uploader" class="input-group">
+                <label class="input-group-btn">
+                  <span class="btn btn-primary">
+                    Browse 
+                    <input id="fileSelect" 
+                           type="file" 
+                           multiple>
+                  </span>
+                  <button id="uploadBtn" 
+                          type="submit" 
+                          disabled
+                          class="btn btn-primary">
+                    Upload
+                  </button>
+                </label>
+                <input id="uploadname" type="text" class="form-control" readonly> 
+              </div> 
+            </form>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static "music/music.js" %}"> </script>
+  </body>
+</html>
+

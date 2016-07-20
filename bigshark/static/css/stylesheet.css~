@@ -1,0 +1,53 @@
+
+#logo {
+    max-width: 20%;
+    max-height: 20%;
+}
+
+#fileSelect {
+   display: none; 
+}
+
+
+.title {
+    display: block;
+}
+
+
+.btn.btn-success.btn-sm {
+    color: #ffffff;
+    background-color: #3b333b;
+    background-image: linear-gradient(to bottom, #3b333b, #3b333b);
+    border-color: #3b333b #3b333b #3b333b;
+}
+
+
+.btn.btn-success.btn-sm:hover {
+    color: #ffffff;
+    background-color: #2b1a2b;
+    background-image: linear-gradient(to bottom, #2b1a2b, #2b1a2b);
+    border-color: #2b1a2b #2b1a2b #2b1a2b;
+}
+
+
+.label.label-primary.title:hover, .btn.btn-primary:hover {
+    color: #ffffff;
+    background-color: #2AABD2;
+    background-image: linear-gradient(to bottom, #2AABD2, #2AABD2);
+    border-color: #28A4C9 #28A4C9 #28A4C9;
+}
+
+
+
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 950px; /* or 950px */
+}
+
+.pre-scrollable {
+    min-height: 400px;
+}
+
+
+
